@@ -31,10 +31,14 @@ class Question < ActiveRecord::Base
 	)
 	
 	def results
-		self.answer_choices
-		    .joins('LEFT OUTER JOIN responses 
-				        ON answer_choices.id = responses.answer_choice_id')
-				.group('answer_choices.id')
-				.select('answer_choices.*, COUNT(responses.id)')
+		choices = answer_choices.select('answer_choices.*, COUNT(responses.id) AS count')
+ 		                        .joins('LEFT OUTER JOIN responses
+ 				                     ON answer_choices.id = responses.answer_choice_id')
+ 		                        .group('answer_choices.id')
+		result_counts = {}
+		choices.each do |choice|
+			result_counts[choice.choice] = choice.count
+		end
+		result_counts
 	end
 end
