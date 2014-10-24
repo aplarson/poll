@@ -34,14 +34,5 @@ FROM (
 )
 
 SELECT
-all_responses.*
+
 FROM
-answer_choices AS response_answers ON user_responses.answer_choice_id = answer_choices.id
-JOIN
-questions ON response_answers.question_id = questions.id
-JOIN
-answer_choices AS question_answers ON questions.id = question_answers.question_id
-JOIN
-responses AS all_responses ON question_answers.id = all_responses.answer_choice_id
-WHERE
-(all_responses.user_id != ?userid AND question

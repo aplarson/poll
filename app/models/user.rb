@@ -42,7 +42,8 @@ class User < ActiveRecord::Base
 	end
 	
 	def questions_answered
-		Poll.joins( :questions => { :answer_choices => { :responses => :respondent } } )
+		Poll.joins( :questions => { :answer_choices => 
+			                        { :responses => :respondent } } )
 				.where('responses.user_id = ?', self.id)
 				.group('polls.id').count
 	end

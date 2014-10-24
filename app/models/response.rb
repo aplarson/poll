@@ -32,6 +32,8 @@ class Response < ActiveRecord::Base
 	source: :question
 	)
 	
+	private
+	
 	def sibling_responses
 		question.responses.where('? IS NULL OR responses.id != ?', self.id, self.id)
 	end
