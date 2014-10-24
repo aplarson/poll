@@ -21,6 +21,7 @@ class AnswerChoice < ActiveRecord::Base
 	:responses,
 	class_name: 'Response',
 	foreign_key: :answer_choice_id,
-	primary_key: :id
+	primary_key: :id,
+	dependent: :destroy
 	)
 end

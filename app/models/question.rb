@@ -21,7 +21,8 @@ class Question < ActiveRecord::Base
 	:answer_choices,
 	class_name: 'AnswerChoice',
 	foreign_key: :question_id,
-	primary_key: :id
+	primary_key: :id,
+	dependent: :destroy
 	)
 	
 	has_many(

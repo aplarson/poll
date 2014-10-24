@@ -21,6 +21,7 @@ class Poll < ActiveRecord::Base
 		:questions,
 		class_name: 'Question',
 		foreign_key: :poll_id,
-		primary_key: :id
+		primary_key: :id,
+		dependent: :destroy
 		)
 end

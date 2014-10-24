@@ -33,11 +33,7 @@ class Response < ActiveRecord::Base
 	)
 	
 	def sibling_responses
-		Response.joins(:answer_choice => { :question => { :answer_choices => :responses } })
-		        .where('answer_choices.id != ?', self.answer_choice_id)
-						.where('? IS NULL OR responses.id != ?', self.id, self.id)
-		
-		#question.responses.where('? IS NULL OR responses.id != ?', self.id, self.id)
+		question.responses.where('? IS NULL OR responses.id != ?', self.id, self.id)
 	end
 	
 	def respondent_has_not_already_answered_question
